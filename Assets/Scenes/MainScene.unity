@@ -3283,12 +3283,6 @@ MonoBehaviour:
     turretUpgradePrefab: {fileID: 5275646723705901454, guid: 1081515d9762b004d8f85b8931adf06b, type: 3}
     costUpgrade: 15
     type: 0
-  selectedTurretDate:
-    turretPrefab: {fileID: 0}
-    cost: 0
-    turretUpgradePrefab: {fileID: 0}
-    costUpgrade: 0
-    type: 0
   moneyText: {fileID: 225048909}
   moneyAnimator: {fileID: 225048908}
 --- !u!4 &383678280 stripped

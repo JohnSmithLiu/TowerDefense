@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
     public float speed = 10; //移动速度
     private Transform[] positions; //移动路径
     private int index = 0; //移动路径点
+    private int totalHp;
     public int hp = 300;
+    public Slider hpSlider;
     public GameObject dieEffectPrefabs;
     // Start is called before the first frame update
     void Start()
     {
         positions = PathPoint.positions;
+        totalHp = hp;
     }
 
     // Update is called once per frame
@@ -55,8 +59,16 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            hp -= damage;
-            if (hp <= 0)
+            if (hp >= damage)
+            {
+                hp -= damage;
+            }
+            else
+            {
+                hp = 0;
+            }
+            hpSlider.value = (float)hp / totalHp;
+            if (hp == 0)
             {
                 Die();
             }
