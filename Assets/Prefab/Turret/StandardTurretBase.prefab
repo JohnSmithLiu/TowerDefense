@@ -472,6 +472,7 @@ GameObject:
   - component: {fileID: 7858660167842549041}
   - component: {fileID: 1869290362562878706}
   - component: {fileID: 6597577405402070580}
+  - component: {fileID: 765321865529307562}
   m_Layer: 7
   m_Name: Upgrade
   m_TagString: Untagged
@@ -581,6 +582,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!95 &765321865529307562
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942124509295814044}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 447d79d80a9ffb944a03d7eaa9c4e0be, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4446449752365759129
 GameObject:
   m_ObjectHideFlags: 0
