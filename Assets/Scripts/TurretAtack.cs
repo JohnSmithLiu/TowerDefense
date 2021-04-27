@@ -10,6 +10,7 @@ public class TurretAtack : MonoBehaviour
     private float timer = 1;
     public Transform firePosition; //攻击目标位置
     public GameObject attackWeaponPrefab; //炮弹类型
+    public Transform headPosition;
     private void OnTriggerEnter(Collider col) //检测敌人进入攻击范围
     {
         if (col.tag == "Enemy")
@@ -35,10 +36,19 @@ public class TurretAtack : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (enemies.Count > 0 && timer >= attackRate)
+        if (enemies.Count > 0)
         {
-            timer = 0;
-            Attack();
+            if (enemies[0] != null)
+            {
+                Vector3 targetPosition = enemies[0].transform.position;
+                targetPosition.y = headPosition.position.y;
+                headPosition.LookAt(targetPosition);
+            }
+            if (timer >= attackRate)
+            {
+                timer = 0;
+                Attack();
+            }
         }
     }
 

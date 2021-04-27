@@ -3267,21 +3267,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserTurretDate:
     turretPrefab: {fileID: 7907853159555947293, guid: 04aeba1a00dca0c42b07c2f4d0aa1995, type: 3}
-    cost: 0
+    cost: 100
     turretUpgradePrefab: {fileID: 3508393869188235832, guid: f7ca71a57ac53e7499bed7c67fae0d4b, type: 3}
-    costUpgrade: 0
+    costUpgrade: 150
     type: 0
   missleTurretDate:
     turretPrefab: {fileID: 941538640917644912, guid: 6a627b64154750943a757c9b7a7ca8ac, type: 3}
-    cost: 0
+    cost: 50
     turretUpgradePrefab: {fileID: 2997154360793764918, guid: d8d1718b0318afd43be7495adcb18017, type: 3}
-    costUpgrade: 0
+    costUpgrade: 75
     type: 0
   standardTurretDate:
     turretPrefab: {fileID: 1597795714495383959, guid: 140f93bbaebc7cb429c281cc6c709794, type: 3}
-    cost: 0
+    cost: 10
     turretUpgradePrefab: {fileID: 5275646723705901454, guid: 1081515d9762b004d8f85b8931adf06b, type: 3}
-    costUpgrade: 0
+    costUpgrade: 15
     type: 0
   selectedTurretDate:
     turretPrefab: {fileID: 0}

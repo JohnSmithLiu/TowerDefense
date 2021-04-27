@@ -11,7 +11,10 @@ public class BuildManager : MonoBehaviour
     public TurretData missleTurretDate;
     public TurretData standardTurretDate;
 
-    public TurretData selectedTurretDate; //当前选择的炮台
+    private TurretData selectedTurretDate; //当前选择的炮台
+    private bool laserSelect = false;
+    private bool missleSelect = false;
+    private bool standardSelect = false;
 
     private int money = 1000;
     public Text moneyText;
@@ -25,31 +28,46 @@ public class BuildManager : MonoBehaviour
 
     public void OnLaserSelected(bool isOn)
     {
-        if (isOn)
+        laserSelect = !laserSelect;
+        if (laserSelect)
         {
             selectedTurretDate = laserTurretDate;
+        }
+        else
+        {
+            selectedTurretDate = null;
         }
     }
 
     public void OnMissleSelected(bool isOn)
     {
-        if (isOn)
+        missleSelect = !missleSelect;
+        if (missleSelect)
         {
             selectedTurretDate = missleTurretDate;
+        }
+        else
+        {
+            selectedTurretDate = null;
         }
     }
 
     public void OnStandardSelected(bool isOn)
     {
-        if (isOn)
+        standardSelect = !standardSelect;
+        if (standardSelect)
         {
             selectedTurretDate = standardTurretDate;
+        }
+        else
+        {
+            selectedTurretDate = null;
         }
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        selectedTurretDate = null;
     }
 
     // Update is called once per frame
@@ -65,11 +83,9 @@ public class BuildManager : MonoBehaviour
                 bool isCollider = Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("MapCube"));
                 if (isCollider)
                 {
-                    print("test1111");
                     MapCube mapCube = hit.collider.GetComponent<MapCube>();
                     if (selectedTurretDate != null && mapCube.turretFlag == null)
                     {
-                        print("test");
                         if (money >= selectedTurretDate.cost)
                         {
                             //可以创建
