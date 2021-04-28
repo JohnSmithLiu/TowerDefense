@@ -8,14 +8,18 @@ public class MapCube : MonoBehaviour
     [HideInInspector]
     public GameObject turretFlag;
     public GameObject buildEffect;
+    public bool isUpgrade;
 
     private new Renderer renderer;
     private Color defaultColor;
+    private TurretData turretDate;
 
-    public void BuildTurret(GameObject turretPrefab) //建造炮塔
+    public void BuildTurret(TurretData turretDate) //建造炮塔
     {
+        this.turretDate = turretDate;
+        isUpgrade = false;
         renderer.material.color = defaultColor;
-        turretFlag = GameObject.Instantiate(turretPrefab, transform.position, Quaternion.identity);
+        turretFlag = GameObject.Instantiate(turretDate.turretPrefab, transform.position, Quaternion.identity);
         GameObject effect = GameObject.Instantiate(buildEffect, transform.position, Quaternion.identity);
         Destroy(effect, 1);
     }
@@ -42,5 +46,21 @@ public class MapCube : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void UpgradeTurret()
+    {
+        Destroy(turretFlag);
+        isUpgrade = true;
+        turretFlag = GameObject.Instantiate(turretDate.turretUpgradePrefab, transform.position, Quaternion.identity);
+        GameObject effect = GameObject.Instantiate(buildEffect, transform.position, Quaternion.identity);
+        Destroy(effect, 1);
+    }
+
+    public void DestoryTurret()
+    {
+        Destroy(turretFlag);
+        turretFlag = null;
+        isUpgrade = false;
     }
 }

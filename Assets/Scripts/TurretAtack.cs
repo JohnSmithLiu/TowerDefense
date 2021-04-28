@@ -11,6 +11,9 @@ public class TurretAtack : MonoBehaviour
     public Transform firePosition; //攻击目标位置
     public GameObject attackWeaponPrefab; //炮弹类型
     public Transform headPosition;
+    public bool isUseLaser = false;
+    public float laserDamage = 70;
+    public LineRenderer laserRenderer;
     private void OnTriggerEnter(Collider col) //检测敌人进入攻击范围
     {
         if (col.tag == "Enemy")
@@ -35,16 +38,35 @@ public class TurretAtack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if (enemies.Count > 0)
+        if (enemies.Count > 0 && enemies[0] != null)
         {
-            if (enemies[0] != null)
+            Vector3 targetPosition = enemies[0].transform.position;
+            targetPosition.y = headPosition.position.y;
+            headPosition.LookAt(targetPosition);
+        }
+        if (isUseLaser)
+        {
+            if (enemies.Count > 0)
             {
-                Vector3 targetPosition = enemies[0].transform.position;
-                targetPosition.y = headPosition.position.y;
-                headPosition.LookAt(targetPosition);
+                laserRenderer.enabled = true;
+                if (enemies[0] == null)
+                {
+                    UpdateEnemy();
+                }
+                if (enemies.Count > 0)
+                {
+                    laserRenderer.SetPositions(new Vector3[] { firePosition.position, enemies[0].transform.position });
+                }
             }
-            if (timer >= attackRate)
+            else
+            {
+                laserRenderer.enabled = false;
+            }
+        }
+        else
+        {
+            timer += Time.deltaTime;
+            if (enemies.Count > 0 && timer >= attackRate)
             {
                 timer = 0;
                 Attack();

@@ -10,8 +10,12 @@ public class BuildManager : MonoBehaviour
     public TurretData laserTurretDate;
     public TurretData missleTurretDate;
     public TurretData standardTurretDate;
+    public GameObject upgradeControl;
+    public Button buttonUpgrade;
 
-    private TurretData selectedTurretDate; //当前选择的炮台
+    private TurretData selectedTurretDate; //当前UI上选择的炮台
+    private MapCube selectedMapCube; //当前选中的方块
+    private Animator upgradeAnimator;
     private bool laserSelect = false;
     private bool missleSelect = false;
     private bool standardSelect = false;
@@ -64,10 +68,41 @@ public class BuildManager : MonoBehaviour
             selectedTurretDate = null;
         }
     }
+
+    void ShowUI(Vector3 position, bool isDisableUpgrade = false)
+    {
+        StopCoroutine("HideUI");
+        upgradeControl.SetActive(false);
+        position.y = 3.5f;
+        upgradeControl.transform.position = position;
+        upgradeControl.SetActive(true);
+        buttonUpgrade.interactable = !isDisableUpgrade;
+    }
+
+    IEnumerator HideUI()
+    {
+        upgradeAnimator.SetTrigger("Hide");
+        yield return new WaitForSeconds(0.8f);
+        upgradeControl.SetActive(false);
+    }
+
+    public void OnUpgradeButtonDown()
+    {
+        selectedMapCube.UpgradeTurret();
+        StartCoroutine(HideUI());
+    }
+
+    public void OnDestoryButtonDown()
+    {
+        selectedMapCube.DestoryTurret();
+        StartCoroutine(HideUI());
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         selectedTurretDate = null;
+        upgradeAnimator = upgradeControl.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -90,7 +125,7 @@ public class BuildManager : MonoBehaviour
                         {
                             //可以创建
                             UpdateMoney(-selectedTurretDate.cost);
-                            mapCube.BuildTurret(selectedTurretDate.turretPrefab);
+                            mapCube.BuildTurret(selectedTurretDate);
                         }
                         else
                         {
@@ -101,6 +136,15 @@ public class BuildManager : MonoBehaviour
                     else if (mapCube.turretFlag != null)
                     {
                         //可以升级
+                        if (mapCube == selectedMapCube && upgradeControl.activeInHierarchy)
+                        {
+                            StartCoroutine(HideUI());
+                        }
+                        else
+                        {
+                            ShowUI(mapCube.transform.position, mapCube.isUpgrade);
+                        }
+                        selectedMapCube = mapCube;
                     }
                 }
             }
