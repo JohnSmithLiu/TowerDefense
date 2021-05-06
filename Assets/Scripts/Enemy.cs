@@ -8,8 +8,8 @@ public class Enemy : MonoBehaviour
     public float speed = 10; //移动速度
     private Transform[] positions; //移动路径
     private int index = 0; //移动路径点
-    private int totalHp;
-    public int hp = 300;
+    private float totalHp;
+    public float hp = 300;
     public Slider hpSlider;
     public GameObject dieEffectPrefabs;
     // Start is called before the first frame update
@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour
         EnemySpawner.enemyCount--;
     }
 
-    public void TakeDamage(int damage) //被攻击掉血
+    public void TakeDamage(float damage) //被攻击掉血
     {
         if (hp <= 0)
         {
@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
             {
                 hp = 0;
             }
-            hpSlider.value = (float)hp / totalHp;
+            hpSlider.value = hp / totalHp;
             if (hp == 0)
             {
                 Die();

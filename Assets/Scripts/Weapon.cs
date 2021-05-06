@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public int damage = 1; //¹¥»÷ÉËº¦
+    public float damage = 1; //¹¥»÷ÉËº¦
     public float speed = 20; //¹¥»÷ËÙ¶È
     private Transform target; //¹¥»÷Ä¿±ê
     public GameObject explosionEffectPrefab; //×Óµ¯±¬Õ¨ÌØÐ§

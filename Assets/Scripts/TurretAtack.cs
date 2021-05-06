@@ -12,8 +12,9 @@ public class TurretAtack : MonoBehaviour
     public GameObject attackWeaponPrefab; //ÅÚµ¯ÀàÐÍ
     public Transform headPosition;
     public bool isUseLaser = false;
-    public float laserDamage = 70;
+    public float laserDamage = 1;
     public LineRenderer laserRenderer;
+    public GameObject laserEffect;
     private void OnTriggerEnter(Collider col) //¼ì²âµÐÈË½øÈë¹¥»÷·¶Î§
     {
         if (col.tag == "Enemy")
@@ -49,6 +50,7 @@ public class TurretAtack : MonoBehaviour
             if (enemies.Count > 0)
             {
                 laserRenderer.enabled = true;
+                laserEffect.SetActive(true);    
                 if (enemies[0] == null)
                 {
                     UpdateEnemy();
@@ -56,11 +58,17 @@ public class TurretAtack : MonoBehaviour
                 if (enemies.Count > 0)
                 {
                     laserRenderer.SetPositions(new Vector3[] { firePosition.position, enemies[0].transform.position });
+                    enemies[0].GetComponent<Enemy>().TakeDamage(laserDamage * Time.deltaTime);
+                    laserEffect.transform.position = enemies[0].transform.position;
+                    Vector3 pos = transform.position;
+                    pos.y = enemies[0].transform.position.y;
+                    laserEffect.transform.LookAt(pos);
                 }
             }
             else
             {
                 laserRenderer.enabled = false;
+                laserEffect.SetActive(false);
             }
         }
         else

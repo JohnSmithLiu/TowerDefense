@@ -12,7 +12,7 @@ public class MapCube : MonoBehaviour
 
     private new Renderer renderer;
     private Color defaultColor;
-    private TurretData turretDate;
+    public TurretData turretDate;
 
     public void BuildTurret(TurretData turretDate) //建造炮塔
     {

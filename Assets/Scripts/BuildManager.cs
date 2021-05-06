@@ -88,7 +88,15 @@ public class BuildManager : MonoBehaviour
 
     public void OnUpgradeButtonDown()
     {
-        selectedMapCube.UpgradeTurret();
+        if (money >= selectedMapCube.turretDate.costUpgrade)
+        {
+            UpdateMoney(-selectedMapCube.turretDate.costUpgrade);
+            selectedMapCube.UpgradeTurret();
+        }
+        else
+        {
+            moneyAnimator.SetTrigger("MoneyFlash");
+        }
         StartCoroutine(HideUI());
     }
 
