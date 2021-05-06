@@ -486,6 +486,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  hp: 50
+  hp: 500
   hpSlider: {fileID: 2470940199347392717}
   dieEffectPrefabs: {fileID: 8023359321737101351, guid: 8aee987ef13718a4e9afa66e70f45143, type: 3}

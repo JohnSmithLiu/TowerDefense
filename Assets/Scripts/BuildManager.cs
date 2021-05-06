@@ -102,6 +102,7 @@ public class BuildManager : MonoBehaviour
 
     public void OnDestoryButtonDown()
     {
+        UpdateMoney(selectedMapCube.cost);
         selectedMapCube.DestoryTurret();
         StartCoroutine(HideUI());
     }

@@ -9,16 +9,18 @@ public class MapCube : MonoBehaviour
     public GameObject turretFlag;
     public GameObject buildEffect;
     public bool isUpgrade;
+    public TurretData turretDate;
+    public int cost;
 
     private new Renderer renderer;
     private Color defaultColor;
-    public TurretData turretDate;
 
     public void BuildTurret(TurretData turretDate) //建造炮塔
     {
         this.turretDate = turretDate;
         isUpgrade = false;
         renderer.material.color = defaultColor;
+        cost = (int)(turretDate.cost * 0.8f);
         turretFlag = GameObject.Instantiate(turretDate.turretPrefab, transform.position, Quaternion.identity);
         GameObject effect = GameObject.Instantiate(buildEffect, transform.position, Quaternion.identity);
         Destroy(effect, 1);
@@ -40,6 +42,7 @@ public class MapCube : MonoBehaviour
     {
         renderer = GetComponent<Renderer>();
         defaultColor = renderer.material.color;
+        cost = 0;
     }
 
     // Update is called once per frame
@@ -52,6 +55,7 @@ public class MapCube : MonoBehaviour
     {
         Destroy(turretFlag);
         isUpgrade = true;
+        cost += (int)(turretDate.costUpgrade * 0.8f);
         turretFlag = GameObject.Instantiate(turretDate.turretUpgradePrefab, transform.position, Quaternion.identity);
         GameObject effect = GameObject.Instantiate(buildEffect, transform.position, Quaternion.identity);
         Destroy(effect, 1);

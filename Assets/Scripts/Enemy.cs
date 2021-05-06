@@ -44,6 +44,7 @@ public class Enemy : MonoBehaviour
     void ReachDestination() //到达目的地，销毁目标
     {
         GameObject.Destroy(this.gameObject);
+        GameManager.Instance.Failed();
     }
 
     void OnDestroy()
