@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed = 10; //移动速度
-    private Transform[] positions; //移动路径
-    private int index = 0; //移动路径点
+    public float speed = 10; //鏁屼汉绉诲姩閫熷害
+    private Transform[] positions; //鏁屼汉绉诲姩杞ㄨ抗
+    private int index = 0;
     private float totalHp;
     public float hp = 300;
     public Slider hpSlider;
@@ -41,10 +41,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void ReachDestination() //到达目的地，销毁目标
+    void ReachDestination() //鍒拌揪缁堢偣锛孭layer Hp-1
     {
-        GameObject.Destroy(this.gameObject);
-        GameManager.Instance.Failed();
+        Player.Instances.hp --;
+        if (Player.Instances.hp <= 0)
+        {
+            GameObject.Destroy(this.gameObject);
+            GameManager.Instance.Failed();
+        }
     }
 
     void OnDestroy()
@@ -52,7 +56,7 @@ public class Enemy : MonoBehaviour
         EnemySpawner.enemyCount--;
     }
 
-    public void TakeDamage(float damage) //被攻击掉血
+    public void TakeDamage(float damage) //鍙楀埌浼ゅ
     {
         if (hp <= 0)
         {

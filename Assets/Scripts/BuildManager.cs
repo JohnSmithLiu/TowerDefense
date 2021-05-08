@@ -13,21 +13,20 @@ public class BuildManager : MonoBehaviour
     public GameObject upgradeControl;
     public Button buttonUpgrade;
 
-    private TurretData selectedTurretDate; //µ±Ç°UIÉÏÑ¡ÔñµÄÅÚÌ¨
-    private MapCube selectedMapCube; //µ±Ç°Ñ¡ÖĞµÄ·½¿é
+    private TurretData selectedTurretDate; //å½“å‰é€‰æ‹©çš„ç‚®å°
+    private MapCube selectedMapCube; //å½“å‰é€‰æ‹©çš„æ–¹å—
     private Animator upgradeAnimator;
     private bool laserSelect = false;
     private bool missleSelect = false;
     private bool standardSelect = false;
 
-    private int money = 1000;
     public Text moneyText;
     public Animator moneyAnimator;
 
     void UpdateMoney(int offset = 0)
     {
-        money += offset;
-        moneyText.text = "$" + money;
+        Player.Instances.money += offset;
+        moneyText.text = "$" + Player.Instances.money;
     }
 
     public void OnLaserSelected(bool isOn)
@@ -88,7 +87,7 @@ public class BuildManager : MonoBehaviour
 
     public void OnUpgradeButtonDown()
     {
-        if (money >= selectedMapCube.turretDate.costUpgrade)
+        if (Player.Instances.money >= selectedMapCube.turretDate.costUpgrade)
         {
             UpdateMoney(-selectedMapCube.turretDate.costUpgrade);
             selectedMapCube.UpgradeTurret();
@@ -121,7 +120,7 @@ public class BuildManager : MonoBehaviour
         {
             if (EventSystem.current.IsPointerOverGameObject() == false)
             {
-                //½¨ÔìÅÚÌ¨
+                //é¼ æ ‡æ˜¯å¦è§¦ç¢°åˆ°MapCube
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 bool isCollider = Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("MapCube"));
@@ -130,21 +129,21 @@ public class BuildManager : MonoBehaviour
                     MapCube mapCube = hit.collider.GetComponent<MapCube>();
                     if (selectedTurretDate != null && mapCube.turretFlag == null)
                     {
-                        if (money >= selectedTurretDate.cost)
+                        if (Player.Instances.money >= selectedTurretDate.cost)
                         {
-                            //¿ÉÒÔ´´½¨
+                            //å¯ä»¥å»ºé€ ç‚®å°
                             UpdateMoney(-selectedTurretDate.cost);
                             mapCube.BuildTurret(selectedTurretDate);
                         }
                         else
                         {
+                            //é‡‘é’±ä¸è¶³
                             moneyAnimator.SetTrigger("MoneyFlash");
-                            //½ğÇ®²»×ã
                         }
                     }
                     else if (mapCube.turretFlag != null)
                     {
-                        //¿ÉÒÔÉı¼¶
+                        //å‡çº§ç‚®å°åˆ¤æ–­
                         if (mapCube == selectedMapCube && upgradeControl.activeInHierarchy)
                         {
                             StartCoroutine(HideUI());

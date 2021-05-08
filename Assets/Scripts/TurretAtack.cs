@@ -6,16 +6,16 @@ public class TurretAtack : MonoBehaviour
 {
 
     public List<GameObject> enemies = new List<GameObject>();
-    public float attackRate = 1; //¹¥»÷ÆµÂÊ
+    public float attackRate = 1; //ç‚®å¡”æ”»å‡»é—´éš”
     private float timer = 1;
-    public Transform firePosition; //¹¥»÷Ä¿±êÎ»ÖÃ
-    public GameObject attackWeaponPrefab; //ÅÚµ¯ÀàĞÍ
+    public Transform firePosition; //ç‚®å¡”æ”»å‡»ç‚¹
+    public GameObject attackWeaponPrefab; //ç‚®å¡”å­å¼¹ç±»å‹
     public Transform headPosition;
     public bool isUseLaser = false;
     public float laserDamage = 1;
     public LineRenderer laserRenderer;
     public GameObject laserEffect;
-    private void OnTriggerEnter(Collider col) //¼ì²âµĞÈË½øÈë¹¥»÷·¶Î§
+    private void OnTriggerEnter(Collider col) //æ•Œäººè¿›å…¥æ”»å‡»èŒƒå›´ï¼Œå¼€å§‹æ”»å‡»
     {
         if (col.tag == "Enemy")
         {
@@ -23,7 +23,7 @@ public class TurretAtack : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider col) //¼ì²âµĞÈËÀë¿ª¹¥»÷·¶Î§
+    private void OnTriggerExit(Collider col) //æ•Œäººç¦»å¼€æ”»å‡»èŒƒå›´ï¼Œæ›´æ–°æ•Œäººåˆ—è¡¨
     {
         if (col.tag == "Enemy")
         {
@@ -82,7 +82,7 @@ public class TurretAtack : MonoBehaviour
         }
     }
 
-    void Attack() //¹¥»÷µĞÈË
+    void Attack() //æ”»å‡»æ•Œäºº
     {
         if (enemies[0] == null)
         {
@@ -97,7 +97,7 @@ public class TurretAtack : MonoBehaviour
         weapon.GetComponent<Weapon>().SetTarget(enemies[0].transform);
     }
 
-    void UpdateEnemy() //¸üĞÂµĞÈËĞÅÏ¢
+    void UpdateEnemy() //æ›´æ–°æ•Œäººåˆ—è¡¨
     {
         for (int index = enemies.Count - 1; index >= 0; index--)
         {

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public float damage = 1; //¹¥»÷ÉËº¦
-    public float speed = 20; //¹¥»÷ËÙ¶È
-    private Transform target; //¹¥»÷Ä¿±ê
-    public GameObject explosionEffectPrefab; //×Óµ¯±¬Õ¨ÌØĞ§
+    public float damage = 1; //ç‚®å¼¹ä¼¤å®³
+    public float speed = 20; //ç‚®å¼¹ç§»åŠ¨é€Ÿåº¦
+    private Transform target; //æ”»å‡»ç›®æ ‡
+    public GameObject explosionEffectPrefab; //æ”»å‡»ç‰¹æ•ˆ
 
-    public void SetTarget(Transform _target) //ÉèÖÃ¹¥»÷Ä¿±ê
+    public void SetTarget(Transform _target) //è®¾ç½®æ”»å‡»ç›®æ ‡
     {
         target = _target;
     }
@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() //ÍùÄ¿±ê·½ÏòÔË¶¯
+    void Update()
     {
         if (target == null)
         {
@@ -31,7 +31,7 @@ public class Weapon : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter(Collider col) //ÓëÄ¿±êÅö×²ºó´¥·¢ÌØĞ§ºÍµôÑª
+    private void OnTriggerEnter(Collider col) //æ”»å‡»å‘½ä¸­ï¼Œè§¦å‘æ”»å‡»ç‰¹æ•ˆ
     {
         if (col.tag == "Enemy")
         {
